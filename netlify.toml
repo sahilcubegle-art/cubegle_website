@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────
+#  Netlify configuration — Cubegle Website
+# ─────────────────────────────────────────────
+
+[build]
+  command   = "npm run build"
+  publish   = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify Next.js plugin — handles SSR, ISR, API routes, image optimisation
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ─── Redirects ────────────────────────────────
+# None required — Next.js App Router handles all routing.
+# Add permanent redirects here if you rename pages.
+
+# ─── Headers ──────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
+
+# Static assets — long-lived cache
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/characters/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,227 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Cubegle Design Tokens
+   Brand colors sourced directly from cubegle.com production CSS:
+   --primary teal #184a57 / #256f82, --accent orange #f59e0b.
+   Light theme: white / light-blue surfaces with deep navy text.
+   ========================================================================== */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono-tech);
+  --font-heading: var(--font-display);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Brand-specific tokens, exposed as Tailwind utilities (bg-brand-orange, text-brand-teal, etc.) */
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-soft: var(--brand-orange-soft);
+  --color-brand-orange-text: var(--brand-orange-text);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-light: var(--brand-teal-light);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-hairline: var(--hairline);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --container-content: 1200px;
+  --container-wide: 1440px;
+  --container-narrow: 760px;
+
+  --ease-out-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-premium: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+}
+
+:root,
+.dark {
+  color-scheme: light;
+
+  /* Brand */
+  --brand-teal: #184a57;
+  --brand-teal-light: #256f82;
+  --brand-orange: #f59e0b;
+  --brand-orange-soft: #fbbf5c;
+  --brand-orange-text: #a8560a;
+  --brand-cyan: #22d3ee;
+
+  /* Surfaces - light blue-white base */
+  --surface-0: #f6fafd;
+  --surface-1: #ffffff;
+  --surface-2: #e9f1fa;
+  --hairline: rgba(15, 42, 76, 0.1);
+
+  --background: var(--surface-0);
+  --foreground: #0f1b2d;
+  --card: var(--surface-1);
+  --card-foreground: #0f1b2d;
+  --popover: var(--surface-1);
+  --popover-foreground: #0f1b2d;
+
+  --primary: var(--brand-orange);
+  --primary-foreground: #1a1206;
+  --secondary: var(--brand-teal);
+  --secondary-foreground: #f4f1ea;
+  --muted: var(--surface-2);
+  --muted-foreground: #475569;
+  --accent: var(--brand-teal-light);
+  --accent-foreground: #f4f1ea;
+  --destructive: oklch(0.58 0.22 25);
+
+  --border: var(--hairline);
+  --input: rgba(15, 42, 76, 0.16);
+  --ring: var(--brand-orange);
+
+  --chart-1: var(--brand-orange);
+  --chart-2: var(--brand-teal-light);
+  --chart-3: var(--brand-cyan);
+  --chart-4: #64748b;
+  --chart-5: var(--brand-teal);
+
+  --radius: 0.75rem;
+
+  --sidebar: var(--surface-1);
+  --sidebar-foreground: #0f1b2d;
+  --sidebar-primary: var(--brand-orange);
+  --sidebar-primary-foreground: #1a1206;
+  --sidebar-accent: var(--surface-2);
+  --sidebar-accent-foreground: #0f1b2d;
+  --sidebar-border: var(--hairline);
+  --sidebar-ring: var(--brand-orange);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  ::selection {
+    background: var(--brand-orange);
+    color: #1a1206;
+  }
+}
+
+@layer utilities {
+  /* Fine grid texture used sparingly on section backgrounds */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-radial-fade {
+    background: radial-gradient(circle at 50% 0%, rgba(37, 140, 190, 0.14), transparent 60%);
+  }
+
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--hairline);
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(120deg, var(--brand-orange), var(--brand-orange-soft) 45%, var(--brand-teal-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .container-content {
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .container-wide {
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}

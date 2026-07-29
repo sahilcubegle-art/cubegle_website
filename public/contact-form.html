@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+  Netlify Forms detection file — DO NOT DELETE
+  ─────────────────────────────────────────────
+  Netlify scans static HTML during the build to register form schemas.
+  Because the live contact form is rendered by React (client-side JS),
+  Netlify's scanner cannot see it in the built HTML.
+
+  This file declares the form schema so Netlify knows to expect submissions
+  under the name "contact". It is never shown to users.
+
+  Actual form submissions are handled by the /api/contact API route
+  (src/app/api/contact/route.ts) which sends email via SMTP.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Contact Form — Netlify Detection</title>
+  </head>
+  <body>
+    <form
+      name="contact"
+      method="POST"
+      netlify
+      data-netlify="true"
+      data-netlify-honeypot="website"
+    >
+      <!-- Honeypot — must match the "website" field in the React form -->
+      <input type="text" name="website" style="display:none" />
+
+      <!-- Mirror every field present in src/components/forms/contact-form.tsx -->
+      <input type="text"  name="name"       />
+      <input type="email" name="email"      />
+      <input type="text"  name="company"    />
+      <input type="text"  name="engagement" />
+      <input type="text"  name="interest"   />
+      <textarea           name="message"    ></textarea>
+    </form>
+  </body>
+</html>
